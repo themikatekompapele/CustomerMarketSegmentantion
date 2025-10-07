@@ -1,0 +1,9 @@
+--to perform trend analysis by observing total amount spent on distinct product categories overtime - quarterly
+select product_category, date, total_amount, transaction_id, age, gender, price_per_unit, quantity,customer_id
+case
+    when date between '2023-01-01' and '2023-03-31' then 'Quarter 1'
+    when date between '2023-04-01' and '2023-06-30' then 'Quarter 2'
+    when date between '2023-07-01' and '2023-09-30' then 'Quarter 3'
+    when date between '2023-10-01' and '2023-12-31' then 'Quarter 4'
+end as time_of_year
+from transactions;
