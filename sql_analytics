@@ -1,0 +1,29 @@
+-- Query to select distinct product category and total amount spent per category
+select distinct product_category,  sum(total_amount) AS total_amount_spent
+from retail.sales.transactions
+group by product_category
+order by total_amount_spent DESC;
+
+-- Query to generate total amount spent on all product categories by females
+select distinct product_category, gender,
+                sum(total_amount) AS total_amount_spent
+from retail.sales.transactions
+where gender='female';
+
+--Query to generate total amount spent on all product categorues by males
+select distinct product_category, gender,
+                sum(total_amount) AS total_amount_spent
+from retail.sales.transactions
+where gender='male';
+
+--Query to analyse customer spending by age group
+select 
+
+
+
+
+
+--to query earliest order date to the last order date
+
+select min(date),max(date)
+from retail.sales.transactions;
