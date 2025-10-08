@@ -16,18 +16,6 @@ select distinct product_category, gender,
 from transactions
 where gender='male';
 
---Query 4: to analyse customer spending by age group
-select transaction_id,
-       customer_id,
-       product_category,
-       date,
-       age,
-       gender,
-       price_per_unit,
-       quantity,
-       total_amount,
-
-
 --Query 5: to determine earliest and latest purchase dates
 select min(date),max(date)
 from transactions;
@@ -59,7 +47,7 @@ END AS AgeGroup
 from transactions;
    
 -- Query 8: Total Expediture Per Category
-select select transaction_id,
+select transaction_id,
        customer_id,
        product_category,
        date,
@@ -67,8 +55,7 @@ select select transaction_id,
        gender,
        price_per_unit,
        quantity,
-       total_amount,
-       age_group
+       total_amount
 from transactions;
 
 --Query 9: Total Amount Spent Monthly
@@ -84,8 +71,7 @@ select transaction_id,
        year(date) AS year,
        monthname(date)AS month_name,
        day(date) AS day_of_the_month
-from transactions
-group by product_category;
+from transactions;
 
 --Query 10: Total Expenditure Per Quarter
 select transaction_id,
