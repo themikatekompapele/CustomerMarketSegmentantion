@@ -1,29 +1,113 @@
--- Query to select distinct product category and total amount spent per category
+-- Query 1: to select distinct product category and total amount spent per category
 select distinct product_category,  sum(total_amount) AS total_amount_spent
-from retail.sales.transactions
+from transactions
 group by product_category
 order by total_amount_spent DESC;
 
--- Query to generate total amount spent on all product categories by females
+-- Query 2: to generate total amount spent on all product categories by females
 select distinct product_category, gender,
                 sum(total_amount) AS total_amount_spent
-from retail.sales.transactions
+from transactions
 where gender='female';
 
---Query to generate total amount spent on all product categorues by males
+-- Query 3: to generate total amount spent on all product categories by males
 select distinct product_category, gender,
                 sum(total_amount) AS total_amount_spent
-from retail.sales.transactions
+from transactions
 where gender='male';
 
---Query to analyse customer spending by age group
-select 
+--Query 4: to analyse customer spending by age group
+select transaction_id,
+       customer_id,
+       product_category,
+       date,
+       age,
+       gender,
+       price_per_unit,
+       quantity,
+       total_amount,
 
 
-
-
-
---to query earliest order date to the last order date
-
+--Query 5: to determine earliest and latest purchase dates
 select min(date),max(date)
-from retail.sales.transactions;
+from transactions;
+
+--Query 6: To determine the youngest and oldest customer age 
+select min(age), max(age)
+from transactions;
+
+--Query 7: Total Amount Spent Per Age Group
+select transaction_id,
+       customer_id,
+       product_category,
+       date,
+       age,
+       gender,
+       price_per_unit,
+       quantity,
+       total_amount,
+       year(date) AS year,
+       monthname(date)AS month_name,
+       day(date) AS day_of_the_month,
+CASE
+    When age BETWEEN '18' AND '25' THEN '18-25'
+    When age BETWEEN '26' AND '35' THEN '26-35'
+    When age BETWEEN '36' AND '45' THEN '36-45'
+    When age BETWEEN '46' AND '55' THEN '46-55'
+    When age>=56 THEN '56-64'
+END AS AgeGroup
+from transactions;
+   
+-- Query 8: Total Expediture Per Category
+select select transaction_id,
+       customer_id,
+       product_category,
+       date,
+       age,
+       gender,
+       price_per_unit,
+       quantity,
+       total_amount,
+       age_group
+from transactions;
+
+--Query 9: Total Amount Spent Monthly
+select transaction_id,
+       customer_id,
+       product_category,
+       date,
+       age,
+       gender,
+       price_per_unit,
+       quantity,
+       total_amount,
+       year(date) AS year,
+       monthname(date)AS month_name,
+       day(date) AS day_of_the_month
+from transactions
+group by product_category;
+
+--Query 10: Total Expenditure Per Quarter
+select transaction_id,
+       customer_id,
+       product_category,
+       date,
+       age,
+       gender,
+       price_per_unit,
+       quantity,
+       total_amount,
+       year(date) AS year,
+       monthname(date)AS month_name,
+       day(date) AS day_of_the_month,
+CASE
+    When date BETWEEN '2023-01-01' AND '2023-03-31' THEN 'Quarter 1'
+    When date BETWEEN '2023-04-01' AND '2023-06-30' THEN 'Quarter 2'
+    When date BETWEEN '2023-07-01' AND '2023-09-30' THEN 'Quarter 3'
+    When date BETWEEN '2023-10-01' AND '2023-12-31' THEN 'Quarter 4'
+END AS Time_of_The_Year
+from transactions
+order by Time_of_The_Year;
+
+
+
