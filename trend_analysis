@@ -7,3 +7,6 @@ case
     when date between '2023-10-01' and '2023-12-31' then 'Quarter 4'
 end as time_of_year
 from transactions;
+
+--Query 2: Total Expenditure by Gender
+select 
